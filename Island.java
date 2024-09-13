@@ -18,7 +18,6 @@ public class Island {
         this.animalLocations = new ArrayList[width][height];
         this.plantLocations = new ArrayList[width][height];
 
-        // Ініціалізація кожної локації на острові для тварин та рослин
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 animalLocations[i][j] = new ArrayList<>();
@@ -26,22 +25,6 @@ public class Island {
             }
         }
         this.executorService = Executors.newFixedThreadPool(15);
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public List<Animal> getAnimals(int x, int y) {
-        return animalLocations[x][y];
-    }
-
-    public List<Plant> getPlants(int x, int y) {
-        return plantLocations[x][y];
     }
 
     public void addAnimalToLocation(int x, int y, Animal animal) {
@@ -82,15 +65,6 @@ public class Island {
         allPlants.add(plant);
     }
 
-    public void removeAnimalCompletely(Animal animal) {
-        for (int x = 0; x < width; x++) {
-            for (int y = 0; y < height; y++) {
-                getAnimals(x, y).remove(animal);
-            }
-        }
-        allAnimals.remove(animal);
-    }
-
     public void simulateDay() {
         resetAllMovements();
         List<Animal> animalsToSimulate = new ArrayList<>(allAnimals);
@@ -121,6 +95,16 @@ public class Island {
         executorService = Executors.newFixedThreadPool(15);
     }
 
+    public void removeAnimalCompletely(Animal animal) {
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                getAnimals(x, y).remove(animal);
+            }
+        }
+        allAnimals.remove(animal);
+    }
+
+
     public void resetAllMovements() {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
@@ -135,9 +119,24 @@ public class Island {
     public void printFinalAnimals() {
         System.out.println("Стан острова після завершення симуляції:");
         for (Animal animal : allAnimals) {
-            System.out.println("Локація (" + animal.getCurrentX() + ", " + animal.getCurrentY() + "):");
-            System.out.println(" - " + animal.getClass().getSimpleName() + " (насичення: " + animal.getCurrentSaturation() + ")");
+            System.out.println(animal.getClass().getSimpleName() + " на локаціяї (" + animal.getCurrentX() + ", " + animal.getCurrentY() + "):");
         }
         System.out.println("----------------------------");
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public List<Animal> getAnimals(int x, int y) {
+        return animalLocations[x][y];
+    }
+
+    public List<Plant> getPlants(int x, int y) {
+        return plantLocations[x][y];
     }
 }

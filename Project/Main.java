@@ -1,9 +1,9 @@
 package Project;
 
 import Project.optional.Island;
-import Project.util.simulate.Simulate;
-import static Project.util.simulate.InitializeIsland.initializeIsland;
-import static Project.util.simulate.InitializeIsland.printFinalAnimals;
+import Project.services.simulate.Simulate;
+
+import static Project.services.simulate.InitializeIsland.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -11,11 +11,12 @@ public class Main {
         Island island = new Island();
 
         initializeIsland(island, simulate);
+        printInitialAnimals();
 
-        for (int day = 1; day <= 10; day++) {
-            System.out.println("День " + day + " на острові:");
+        for (int day = 1; day <= 1; day++) {
+            System.out.println("================= День " + day + " =================");
             simulate.simulateDay();
-            System.out.println("----------------------------");
+            System.out.println("===================================================");
 
             try {
                 Thread.sleep(2000);

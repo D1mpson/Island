@@ -1,7 +1,7 @@
 package Project.optional;
 
-import Project.plant.Plant;
-import Project.util.Animal;
+import Project.entity.plant.Plant;
+import Project.services.Animal;
 
 import java.util.ArrayList;
 import java.util.List;
